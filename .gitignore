@@ -154,3 +154,17 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+ReadMe.txt
+focusMeasure.sln
+focusMeasure.vcxproj
+focusMeasure.vcxproj.filters
+laserWidth/ReadMe.txt
+laserWidth/laserWidth.cpp
+laserWidth/laserWidth.vcxproj
+laserWidth/laserWidth.vcxproj.filters
+laserWidth/stdafx.cpp
+laserWidth/stdafx.h
+laserWidth/targetver.h
+stdafx.cpp
+stdafx.h
+targetver.h
