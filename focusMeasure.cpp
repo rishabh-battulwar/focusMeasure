@@ -16,7 +16,9 @@ double varianceOfLaplacian(const cv::Mat& src);
 
 int main(int argc, char *argv[])
 {
-	char inFile[100] = "C:\\data\\cameraFocusData\\image001.bmp";
+	//char inFile[100] = "C:\\data\\cameraFocusData\\image001.bmp";
+	char inFile[100] = "C:/data/img_color.bmp";
+
 	char methodName[10] = "lapv"; //default
 	std::string longMethodName = "Variance of Laplacian";
 	int methodNumber;
@@ -47,45 +49,32 @@ int main(int argc, char *argv[])
 	//	methodNumber = 3;
 
 	cv::Mat sourceFile;
-	double FM;
+	double FM, maxFM = 0;
 	sourceFile = cvLoadImage(inFile);
-	cv::Rect ROI(121, 140, 1750, 940);
-
-	// Crop the full image to that image contained by the rectangle myROI
-	// Note that this doesn't copy the data
-	cv::Mat croppedRef(sourceFile, ROI);
-
-	cv::Mat cropped;
-	// Copy the data into new matrix
-	croppedRef.copyTo(cropped);
-
-
-	/*switch (methodNumber)
+	//sourceFile = cv::imread(inFile);
+	
+	int topLeftX = 721, bottomRightX = 1641;
+		for (int i = 0; i < 6; i++)
 	{
-	case 1:
-		FM = modifiedLaplacian(cropped);
-		longMethodName = "Modified Laplacian";
-		break;
+		int topLeftY, bottomRightY;
+		topLeftY = 120 + (i * 30); bottomRightY = topLeftY + 240;
+		cv::Rect ROI(cv::Point(topLeftX,topLeftY), cv::Point(bottomRightX, bottomRightY));
 
-	case 2:*/
+		// Crop the full image to that image contained by the rectangle myROI
+		// Note that this doesn't copy the data
+		cv::Mat croppedRef(sourceFile, ROI);
 
+		cv::Mat cropped;
+		// Copy the data into new matrix
+		croppedRef.copyTo(cropped);
+
+		FM = 0;
 		FM = varianceOfLaplacian(cropped);
 
-		//longMethodName = "Variance of Laplacian";
-				
-		//break;
-
-	/*case 3:
-		FM = normalizedGraylevelVariance(cropped);
-		longMethodName = "Normalized Gray Level Variance";
-		break;
-
-	default:
-		break;
-	}*/
-
-	std::cout << "\n MethodName: " << longMethodName << "\n Focus Measure = " << FM << "\n" <<std::endl;
-	if (FM > 125.00)
+		if (maxFM < FM) maxFM = FM;
+	}
+	std::cout << "\n MethodName: " << longMethodName << "\n Focus Measure = " << maxFM << "\n" <<std::endl;
+	if (maxFM > 250.00)
 		std::cout << " Good Camera \n" << std::endl;
 	else
 		std::cout << " Bad Camera \n" << std::endl;
