@@ -159,7 +159,6 @@ focusMeasure.sln
 focusMeasure.vcxproj
 focusMeasure.vcxproj.filters
 laserWidth/ReadMe.txt
-laserWidth/laserWidth.cpp
 laserWidth/laserWidth.vcxproj
 laserWidth/laserWidth.vcxproj.filters
 laserWidth/stdafx.cpp
